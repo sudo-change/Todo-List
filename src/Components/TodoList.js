@@ -1,48 +1,74 @@
 import styled from "styled-components";
 
-const TodoItem = styled.li`
+const TodoList = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const TodoItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  padding: 10px;
+  width: 80%;
+  margin-bottom: 0px;
+  background-color: white;
+  padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
+`;
+
+const TodoText = styled.div`
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  ${(props) => props.isCompleted && "text-decoration: line-through;"}
+`;
+
+const TodoButtons = styled.div``;
+
+const TodoButton = styled.button`
+  display: inline-block;
+  width: 40px;
+  height: 40px;
   font-size: 16px;
-`;
-
-const Todolist = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-`;
-
-const TodoText = styled.span``;
-
-const TodoDeleteButton = styled.button`
-  padding: 10px 20px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  background-color: white;
+  :hover:hover {
+    background-color: currentColor;
+    color: white;
+    transition: 0.7s;
+  }
+  border: 1px solid;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  margin-left: 5px;
 `;
 
-const TodoList = ({ todos, handleDelete }) => {
+const Todolist = ({ todos, handleDelete, markTodo }) => {
   return (
-    <Todolist>
+    <TodoList>
       {todos.map((todo) => (
         <TodoItem key={todo.id}>
-          <TodoText>{todo.text}</TodoText>
-          <TodoDeleteButton onClick={() => handleDelete(todo.id)}>
-            Delete
-          </TodoDeleteButton>
+          <TodoText isCompleted={todo.isCompleted}>{todo.text}</TodoText>
+          <TodoButtons>
+            <TodoButton
+              onClick={() => markTodo(todo.id)}
+              style={{ color: "#28a745" }}
+            >
+              ✓
+            </TodoButton>
+            <TodoButton
+              onClick={() => handleDelete(todo.id)}
+              style={{ color: "#dc3545" }}
+            >
+              ✕
+            </TodoButton>
+          </TodoButtons>
         </TodoItem>
       ))}
-    </Todolist>
+    </TodoList>
   );
 };
 
-export default TodoList;
+export default Todolist;
