@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   background-color: #fffaf0;
   margin: 0px;
   font-family: sans-serif;
+  
 `;
 
 const Title = styled.h1`
